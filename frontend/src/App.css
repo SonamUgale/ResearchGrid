@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+  color: #1e293b;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+main {
+  flex: 1;
+  margin-left: 220px; /* sidebar space */
+  margin-top: 65px; /* navbar space */
+  margin-bottom: 70px; /* footer space */
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #f9fafb;
+}

@@ -1,0 +1,137 @@
+/* ================= Notes Section ================= */
+.notes-section {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center heading and button */
+}
+
+.notes-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Textarea */
+.note-input {
+  width: 70%;
+  min-height: 100px;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  margin-bottom: 15px;
+  resize: vertical;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+/* Add Note Button */
+.add-note-btn {
+  background-color: rgb(52, 52, 107);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 25px;
+  align-self: center; /* center button */
+}
+
+.add-note-btn:hover {
+  background-color: rgb(35, 35, 85);
+}
+
+/* Notes List */
+.notes-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  gap: 20px;
+  justify-items: center;
+  text-align: center;
+}
+
+/* Center "No notes yet." */
+.notes-list p {
+  grid-column: 1 / -1; /* span full width of grid */
+  text-align: center;
+  font-size: 15px;
+  color: #475569;
+  margin: 20px 0;
+}
+
+/* Note Card */
+.note-card {
+  width: 100%;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.note-text {
+  font-size: 15px;
+  color: #1e293b;
+  text-align: justify;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Note Footer */
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-author {
+  font-size: 14px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.delete-icon {
+  color: red;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.delete-icon:hover {
+  color: darkred;
+}
+
+/* ================= Mobile Responsiveness ================= */
+@media (max-width: 600px) {
+  .note-input {
+    min-height: 80px;
+    font-size: 13px;
+  }
+
+  .add-note-btn {
+    padding: 8px 16px;
+  }
+
+  .notes-list {
+    grid-template-columns: 1fr; /* 1 card per row on mobile */
+  }
+
+  .note-card {
+    padding: 10px;
+  }
+
+  .note-text {
+    font-size: 13px;
+  }
+
+  .note-footer {
+    font-size: 11px;
+  }
+}

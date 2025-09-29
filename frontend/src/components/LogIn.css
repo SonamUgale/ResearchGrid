@@ -1,0 +1,126 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px; /* ensures modal is not cut off on small screens */
+  overflow-y: auto; /* scroll if modal too tall */
+}
+
+/* Modal Box */
+.modal {
+  background: white;
+  padding: 40px 30px 30px 30px;
+  border-radius: 10px;
+  width: 350px;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease; /* smooth resize when errors appear */
+}
+
+/* Close Button */
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #1b1b2f;
+}
+
+/* Modal Title */
+.modal h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #1b1b2f;
+}
+
+/* Form */
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input Group (with error and success) */
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px; /* enough space for error messages */
+}
+
+/* Input Field */
+input {
+  padding: 10px 40px 10px 10px; /* space for success checkmark */
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* Input Validation States */
+input.input-error {
+  border-color: #ff4b5c;
+}
+
+input.input-success {
+  border-color: #16a34a;
+}
+
+/* Error Message */
+.error-msg {
+  color: #ff4b5c;
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+/* Success Checkmark */
+.success-check {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #16a34a;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+/* Submit Button */
+.modal button {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1b1b2f;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal button:hover {
+  background-color: #2d2d44;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .modal {
+    width: 100%;
+    padding: 30px 20px 20px 20px;
+  }
+}

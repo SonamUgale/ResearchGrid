@@ -1,0 +1,24 @@
+.papers-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+
+  /* Alignment fixes */
+  margin: auto auto; /* centers the grid */
+  padding: 20px;
+  max-width: 1200px; /* keeps cards from stretching too wide */
+}
+
+.no-papers {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #64748b !important;
+  font-size: 1rem;
+  margin-top: 40px;
+}
+
+.papers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}

@@ -1,0 +1,39 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 220px; /* same as sidebar width */
+  right: 0;
+  height: 60px;
+  background-color: #2a2a3d; /* footer background */
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
+  border-top: 1px solid #3a3a4d;
+  z-index: 1000;
+}
+
+.add-paper-btn {
+  background-color: #4a90e2 !important; /* lighter blue */
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  margin-bottom: 5px !important;
+  border-radius: 8px;
+  display: flex;
+  align-items: center !important;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.add-paper-btn:hover {
+  background-color: #357abd !important; /* slightly darker on hover */
+  transform: translateY(-2px);
+}
+
+.add-paper-btn .icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
