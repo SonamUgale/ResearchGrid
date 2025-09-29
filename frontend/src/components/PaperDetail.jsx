@@ -6,7 +6,7 @@ import Notes from "./Notes";
 import "./PaperDetail.css";
 
 function PaperDetail({ token, currentUser }) {
-  const { id } = useParams(); // UUID
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [paper, setPaper] = useState(null);
@@ -34,6 +34,7 @@ function PaperDetail({ token, currentUser }) {
   if (loading) return <p>Loading paper...</p>;
   if (error || !paper) return <p>{error || "Paper not found."}</p>;
 
+  // Minimal changes: filter out empty tags, keep authors as-is
   const authorsList = Array.isArray(paper.authors)
     ? paper.authors
     : paper.authors
@@ -42,11 +43,12 @@ function PaperDetail({ token, currentUser }) {
         .map((a) => a.trim()) || [];
 
   const tagsList = Array.isArray(paper.tags)
-    ? paper.tags
+    ? paper.tags.filter((t) => t.trim() !== "")
     : paper.tags
         ?.toString()
         .split(",")
-        .map((t) => t.trim()) || [];
+        .map((t) => t.trim())
+        .filter((t) => t !== "") || [];
 
   const handleDelete = async () => {
     try {
@@ -81,6 +83,8 @@ function PaperDetail({ token, currentUser }) {
           <span>{paper.journal || "Unknown Journal"}</span>
           <span>{paper.year || "N/A"}</span>
         </div>
+
+        {/* Minimal change: render each tag as separate pill */}
         <div className="paper-tags">
           {tagsList.map((tag, idx) => (
             <span key={idx} className="tag">
@@ -89,7 +93,6 @@ function PaperDetail({ token, currentUser }) {
           ))}
         </div>
 
-        {/* Only owner can edit/delete */}
         {currentUser && paper.user === currentUser._id && (
           <div className="detail-buttons">
             <button className="edit-btn" onClick={handleEdit}>
@@ -107,7 +110,6 @@ function PaperDetail({ token, currentUser }) {
 
       <Notes paperId={paper.id} token={token} currentUser={currentUser} />
 
-      {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal">

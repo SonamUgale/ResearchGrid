@@ -1,5 +1,6 @@
 import Paper from "../models/paper.js";
 
+// Create a new paper
 export const createPaper = async (req, res) => {
   try {
     const { title, authors, abstract, journal, year, tags } = req.body;
@@ -8,19 +9,28 @@ export const createPaper = async (req, res) => {
       return res.status(400).json({ message: "Title is required" });
     }
 
-    // Convert comma-separated strings to arrays
-    const authorsArray = authors
-      ? authors
+    // Minimal fix: handle stringified JSON arrays or comma-separated strings
+    let authorsArray = [];
+    if (authors) {
+      if (typeof authors === "string" && authors.trim().startsWith("["))
+        authorsArray = JSON.parse(authors);
+      else
+        authorsArray = authors
           .split(",")
           .map((a) => a.trim())
-          .filter(Boolean)
-      : [];
-    const tagsArray = tags
-      ? tags
+          .filter(Boolean);
+    }
+
+    let tagsArray = [];
+    if (tags) {
+      if (typeof tags === "string" && tags.trim().startsWith("["))
+        tagsArray = JSON.parse(tags);
+      else
+        tagsArray = tags
           .split(",")
           .map((t) => t.trim())
-          .filter(Boolean)
-      : [];
+          .filter(Boolean);
+    }
 
     const paperData = {
       title,
@@ -43,6 +53,7 @@ export const createPaper = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 export const getAllPapers = async (req, res) => {
   try {
     const { tag, author, journal } = req.query;
@@ -52,31 +63,37 @@ export const getAllPapers = async (req, res) => {
     if (author) filter.authors = { $regex: author, $options: "i" };
     if (journal) filter.journal = { $regex: journal, $options: "i" };
 
-    console.log("Filter applied:", filter);
+    // Fetch papers as plain JS objects
+    const papers = await Paper.find(filter).lean();
 
-    const papers = await Paper.find(filter);
-    console.log("Papers found:", papers);
+    // Minimal normalization: ensure authors are arrays
+    const normalizedPapers = papers.map((p) => ({
+      ...p,
+      authors: Array.isArray(p.authors)
+        ? p.authors
+        : p.authors
+        ? JSON.parse(p.authors)
+        : [],
+    }));
 
-    res.status(200).json(papers);
+    res.status(200).json(normalizedPapers);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+// Get a paper by ID
 export const getPaperByIdPublic = async (req, res) => {
   try {
     const paper = await Paper.findOne({ id: req.params.id }).select("-__v");
-
-    if (!paper) {
-      return res.status(404).json({ message: "Paper not found" });
-    }
-
+    if (!paper) return res.status(404).json({ message: "Paper not found" });
     res.status(200).json(paper);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+// Update a paper
 export const updatePaper = async (req, res) => {
   try {
     const paper = await Paper.findOne({ id: req.params.id });
@@ -93,18 +110,26 @@ export const updatePaper = async (req, res) => {
     paper.journal = journal || paper.journal;
     paper.year = year || paper.year;
 
-    // Convert authors/tags to arrays if provided
+    // Minimal fix: parse authors
     if (authors) {
-      paper.authors = authors
-        .split(",")
-        .map((a) => a.trim())
-        .filter(Boolean);
+      if (typeof authors === "string" && authors.trim().startsWith("["))
+        paper.authors = JSON.parse(authors);
+      else
+        paper.authors = authors
+          .split(",")
+          .map((a) => a.trim())
+          .filter(Boolean);
     }
+
+    // Minimal fix: parse tags
     if (tags) {
-      paper.tags = tags
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean);
+      if (typeof tags === "string" && tags.trim().startsWith("["))
+        paper.tags = JSON.parse(tags);
+      else
+        paper.tags = tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean);
     }
 
     // Update file if uploaded
@@ -118,10 +143,11 @@ export const updatePaper = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Delete a paper
 export const deletePaper = async (req, res) => {
   try {
     const paper = await Paper.findOne({ id: req.params.id });
-
     if (!paper) return res.status(404).json({ message: "Paper not found" });
 
     if (paper.user.toString() !== req.user._id.toString()) {
@@ -135,15 +161,14 @@ export const deletePaper = async (req, res) => {
   }
 };
 
-//************************************NOTE ROUTES*********************************** */
+// ******************************** NOTE ROUTES ********************************
 
-// Add Note to Paper
+// Add Note
 export const addNoteToPaper = async (req, res) => {
   try {
     const { paperId } = req.params;
     const { text } = req.body;
 
-    // Use findOne with UUID instead of findById
     const paper = await Paper.findOne({ id: paperId });
     if (!paper) return res.status(404).json({ message: "Paper not found" });
 
@@ -154,20 +179,16 @@ export const addNoteToPaper = async (req, res) => {
 
     paper.notes.push(note);
     await paper.save();
-
-    // Return the newly added note (last in array)
     res.status(201).json(paper.notes[paper.notes.length - 1]);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Get Notes for Paper
+// Get Notes
 export const getNotesForPaper = async (req, res) => {
   try {
     const { paperId } = req.params;
-
-    // Use findOne with UUID instead of findById
     const paper = await Paper.findOne({ id: paperId }).populate(
       "notes.createdBy",
       "name email"
@@ -180,26 +201,22 @@ export const getNotesForPaper = async (req, res) => {
   }
 };
 
-// Delete Note from Paper
+// Delete Note
 export const deleteNoteFromPaper = async (req, res) => {
   try {
     const { paperId, noteId } = req.params;
-
-    // Use findOne with UUID instead of findById
     const paper = await Paper.findOne({ id: paperId });
     if (!paper) return res.status(404).json({ message: "Paper not found" });
 
     const note = paper.notes.id(noteId);
     if (!note) return res.status(404).json({ message: "Note not found" });
 
-    // Only the creator can delete
     if (note.createdBy.toString() !== req.user._id.toString()) {
       return res.status(403).json({ message: "Not authorized" });
     }
 
-    await note.deleteOne(); // remove the embedded subdocument
+    await note.deleteOne();
     await paper.save();
-
     res.status(200).json({ message: "Note deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });

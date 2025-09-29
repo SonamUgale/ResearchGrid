@@ -27,14 +27,20 @@ function AddPaper({ token, onNewPaper }) {
     formData.append(
       "authors",
       JSON.stringify(authors.split(",").map((a) => a.trim()))
-    ); // array
+    );
     formData.append("abstract", abstract);
     formData.append("journal", journal);
     formData.append("year", year);
+    // Minimal change: filter out empty tags
     formData.append(
       "tags",
-      JSON.stringify(tags.split(",").map((t) => t.trim()))
-    ); // array
+      JSON.stringify(
+        tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter((t) => t !== "")
+      )
+    );
     if (file) formData.append("file", file);
 
     try {
@@ -49,7 +55,7 @@ function AddPaper({ token, onNewPaper }) {
         }
       );
 
-      onNewPaper(res.data); // backend already returns authors & tags as arrays
+      onNewPaper(res.data);
       toast.success("Paper added successfully!");
       navigate("/");
     } catch (err) {

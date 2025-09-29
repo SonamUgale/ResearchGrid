@@ -5,24 +5,12 @@ import "./PaperCard.css";
 function PaperCard({ paper }) {
   const navigate = useNavigate();
 
-  // Normalize authors
-  const authorsList = Array.isArray(paper.authors)
-    ? paper.authors
-    : paper.authors
-    ? paper.authors
-        .toString()
-        .split(",")
-        .map((a) => a.trim())
-    : [];
+  // Authors: now guaranteed to be an array from backend
+  const authorsList = Array.isArray(paper.authors) ? paper.authors : [];
 
-  // Normalize tags
+  // Tags: already working as before
   const tagsList = Array.isArray(paper.tags)
-    ? paper.tags
-    : paper.tags
-    ? paper.tags
-        .toString()
-        .split(",")
-        .map((t) => t.trim())
+    ? paper.tags.filter((t) => t.trim() !== "")
     : [];
 
   return (
