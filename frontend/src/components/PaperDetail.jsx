@@ -75,12 +75,16 @@ function PaperDetail({ token, currentUser }) {
 
       <div className="paper-detail-card">
         <h1 className="paper-title">{paper.title}</h1>
-        <p className="paper-authors">{authorsList.join(", ")}</p>
+        <p className="paper-authors">By {authorsList.join(", ")}</p>
         <div className="paper-abstract">
+          <p>
+            <b>ABSTRACT</b>
+          </p>
           {paper.abstract || "No abstract available"}
         </div>
         <div className="paper-meta">
           <span>{paper.journal || "Unknown Journal"}</span>
+          <p>|</p>
           <span>{paper.year || "N/A"}</span>
         </div>
 
@@ -128,7 +132,7 @@ function PaperDetail({ token, currentUser }) {
                   handleDelete();
                 }}
               >
-                Yes, Delete
+                Yes
               </button>
             </div>
           </div>

@@ -77,7 +77,7 @@ function AddPaper({ token, onNewPaper }) {
         />
         <input
           type="text"
-          placeholder="Authors (comma separated)"
+          placeholder="Authors"
           value={authors}
           onChange={(e) => setAuthors(e.target.value)}
           required
@@ -102,7 +102,7 @@ function AddPaper({ token, onNewPaper }) {
         />
         <input
           type="text"
-          placeholder="Tags (comma separated)"
+          placeholder="Tags"
           value={tags}
           onChange={(e) => setTags(e.target.value)}
         />
