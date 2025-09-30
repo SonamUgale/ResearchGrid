@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./paperCard.css";
+import "./PaperCard.css";
 
 function PapersList({ papers, searchTerm }) {
   const navigate = useNavigate();
