@@ -22,7 +22,6 @@ function App() {
   const [showSignup, setShowSignup] = useState(false);
   const [papers, setPapers] = useState([]);
 
-  // Restore user from localStorage
   useEffect(() => {
     const savedUser = localStorage.getItem("rp_user");
     if (savedUser) {

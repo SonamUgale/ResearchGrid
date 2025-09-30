@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "./AddPaper.css"; // reuse the same styling
+import "./AddPaper.css";
 
 function UpdatePaper({ token, currentUser }) {
-  const { id } = useParams(); // UUID of the paper
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -26,7 +26,6 @@ function UpdatePaper({ token, currentUser }) {
 
         const paper = res.data;
 
-        // Prefill form values
         setTitle(paper.title || "");
         setAuthors(
           Array.isArray(paper.authors) ? paper.authors.join(", ") : ""
@@ -53,7 +52,6 @@ function UpdatePaper({ token, currentUser }) {
     e.preventDefault();
 
     try {
-      // Convert comma-separated authors/tags to arrays
       const authorsArray =
         typeof authors === "string"
           ? authors

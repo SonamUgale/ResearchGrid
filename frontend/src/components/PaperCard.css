@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  height: 300px; /* consistent height */
+  height: 300px;
   overflow: hidden;
 }
 
@@ -51,12 +51,12 @@
   margin-bottom: 12px;
   word-wrap: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 6; /* truncate roughly 6 lines */
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
 }
 
 .paper-card .abstract.expanded {
-  -webkit-line-clamp: unset; /* show full abstract when expanded */
+  -webkit-line-clamp: unset;
 }
 
 .paper-card .read-more {
@@ -89,7 +89,7 @@
 .paper-card .tags {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap; /* ensures multiple tags wrap to next line */
+  flex-wrap: wrap;
 }
 
 .paper-card .tag {
@@ -108,7 +108,7 @@
   transform: scale(1.05);
 }
 
-/* ================= Mobile Responsiveness ================= */
+/******************* Mobile Responsiveness ***************** */
 @media (max-width: 600px) {
   .papers-grid {
     grid-template-columns: 1fr;
@@ -116,7 +116,7 @@
   }
 
   .paper-card {
-    height: auto; /* let content dictate height on small screens */
+    height: auto;
     padding: 15px;
   }
 

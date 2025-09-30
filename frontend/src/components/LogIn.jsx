@@ -1,4 +1,3 @@
-// src/components/LogIn.jsx
 import { useState } from "react";
 import "./LogIn.css";
 import axios from "axios";
@@ -40,7 +39,6 @@ function Login({ onLoginSuccess, onClose }) {
       const userData = res.data;
 
       if (userData && userData.token) {
-        // persist user info so App can reload it
         localStorage.setItem("rp_user", JSON.stringify(userData));
 
         toast.success("Logged in successfully!");

@@ -57,7 +57,7 @@
   flex-direction: column;
   gap: 10px;
   padding: 20px;
-  margin-bottom: 20px; /* Added margin from bottom */
+  margin-bottom: 20px;
 }
 
 .sidebar-btn {

@@ -1,19 +1,19 @@
 .footer {
   position: fixed;
   bottom: 0;
-  left: 220px; /* same as sidebar width */
+  left: 220px;
   right: 0;
   height: 60px;
-  background-color: #2a2a3d; /* footer background */
+  background-color: #2a2a3d;
   display: flex;
-  justify-content: center; /* center horizontally */
-  align-items: center; /* center vertically */
+  justify-content: center;
+  align-items: center;
   border-top: 1px solid #3a3a4d;
   z-index: 1000;
 }
 
 .add-paper-btn {
-  background-color: #4a90e2 !important; /* lighter blue */
+  background-color: #4a90e2 !important;
   color: white;
   border: none;
   padding: 10px 22px;
@@ -29,7 +29,7 @@
 }
 
 .add-paper-btn:hover {
-  background-color: #357abd !important; /* slightly darker on hover */
+  background-color: #357abd !important;
   transform: translateY(-2px);
 }
 

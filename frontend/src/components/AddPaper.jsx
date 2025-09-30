@@ -31,7 +31,7 @@ function AddPaper({ token, onNewPaper }) {
     formData.append("abstract", abstract);
     formData.append("journal", journal);
     formData.append("year", year);
-    // Minimal change: filter out empty tags
+
     formData.append(
       "tags",
       JSON.stringify(

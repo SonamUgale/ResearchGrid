@@ -5,10 +5,10 @@ function Navbar({ searchTerm, setSearchTerm, onSearch }) {
   return (
     <header className="navbar">
       <div className="navbar-content">
-        {/* Left: Logo */}
+        {}
         <h1 className="navbar-logo">ResearchGrid</h1>
 
-        {/* Center: Search Box */}
+        {}
         <div className="search-box">
           <FaSearch className="search-icon" />
           <input

@@ -1,4 +1,3 @@
-// src/components/SignUp.jsx
 import { useState } from "react";
 import "./SignUp.css";
 import axios from "axios";
@@ -41,13 +40,12 @@ function Signup({ onSignupSuccess, onClose }) {
         password,
       });
 
-      const userData = res.data; // ✅ contains id/_id, name, email, token
+      const userData = res.data;
 
-      // persist the full user object
       localStorage.setItem("rp_user", JSON.stringify(userData));
 
       toast.success("Account created successfully!");
-      onSignupSuccess(userData); // ✅ pass full user object up to App
+      onSignupSuccess(userData);
     } catch (err) {
       if (err.response && err.response.data.message) {
         toast.error(err.response.data.message);

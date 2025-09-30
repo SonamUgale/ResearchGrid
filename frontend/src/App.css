@@ -23,9 +23,9 @@ html,
 
 main {
   flex: 1;
-  margin-left: 220px; /* sidebar space */
-  margin-top: 65px; /* navbar space */
-  margin-bottom: 70px; /* footer space */
+  margin-left: 220px;
+  margin-top: 65px;
+  margin-bottom: 70px;
   padding: 20px;
   overflow-y: auto;
   background-color: #f9fafb;

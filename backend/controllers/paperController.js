@@ -9,7 +9,6 @@ export const createPaper = async (req, res) => {
       return res.status(400).json({ message: "Title is required" });
     }
 
-    // Minimal fix: handle stringified JSON arrays or comma-separated strings
     let authorsArray = [];
     if (authors) {
       if (typeof authors === "string" && authors.trim().startsWith("["))
@@ -39,7 +38,7 @@ export const createPaper = async (req, res) => {
       journal,
       year,
       tags: tagsArray,
-      user: req.user._id, // owner
+      user: req.user._id,
     };
 
     // Add uploaded file if exists
@@ -66,7 +65,7 @@ export const getAllPapers = async (req, res) => {
     // Fetch papers as plain JS objects
     const papers = await Paper.find(filter).lean();
 
-    // Minimal normalization: ensure authors are arrays
+    // ensure authors are arrays
     const normalizedPapers = papers.map((p) => ({
       ...p,
       authors: Array.isArray(p.authors)
@@ -110,7 +109,6 @@ export const updatePaper = async (req, res) => {
     paper.journal = journal || paper.journal;
     paper.year = year || paper.year;
 
-    // Minimal fix: parse authors
     if (authors) {
       if (typeof authors === "string" && authors.trim().startsWith("["))
         paper.authors = JSON.parse(authors);
@@ -121,7 +119,6 @@ export const updatePaper = async (req, res) => {
           .filter(Boolean);
     }
 
-    // Minimal fix: parse tags
     if (tags) {
       if (typeof tags === "string" && tags.trim().startsWith("["))
         paper.tags = JSON.parse(tags);

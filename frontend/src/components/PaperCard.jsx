@@ -6,16 +6,13 @@ function PaperCard({ paper }) {
   const navigate = useNavigate();
   const [showFullAbstract, setShowFullAbstract] = useState(false);
 
-  // Authors: always an array from backend
   const authorsList = Array.isArray(paper.authors) ? paper.authors : [];
 
-  // Tags (limit to first 2 only)
   const tagsList = Array.isArray(paper.tags)
     ? paper.tags.filter((t) => t.trim() !== "").slice(0, 2)
     : [];
 
-  // Abstract truncation
-  const abstractLimit = 140; // updated limit
+  const abstractLimit = 140;
   const isLongAbstract =
     paper.abstract && paper.abstract.length > abstractLimit;
   const displayedAbstract =
@@ -33,7 +30,7 @@ function PaperCard({ paper }) {
           <span
             className="read-more"
             onClick={(e) => {
-              e.stopPropagation(); // prevent card click
+              e.stopPropagation();
               setShowFullAbstract(!showFullAbstract);
             }}
           >

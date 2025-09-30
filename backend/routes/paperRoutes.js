@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { storage } from "../cloudConfig.js"; // Import storage
+import { storage } from "../cloudConfig.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 import {
@@ -15,27 +15,27 @@ import {
 } from "../controllers/paperController.js";
 
 const router = express.Router();
-const upload = multer({ storage }); // Initialize Multer
+const upload = multer({ storage });
 
 // Root route
 router
   .route("/")
-  .get(getAllPapers) // Public
-  .post(protect, upload.single("file"), createPaper); // Private, optional file
+  .get(getAllPapers)
+  .post(protect, upload.single("file"), createPaper);
 
 // Single paper route
 router
   .route("/:id")
-  .get(getPaperByIdPublic) // Public
-  .put(protect, upload.single("file"), updatePaper) // Private, optional file
-  .delete(protect, deletePaper); // Private
+  .get(getPaperByIdPublic)
+  .put(protect, upload.single("file"), updatePaper)
+  .delete(protect, deletePaper);
 
-// ---------- Notes Routes ----------
+// *************** Notes Routes **************
 router
   .route("/:paperId/notes")
-  .post(protect, addNoteToPaper) // Add note
-  .get(getNotesForPaper); // Get all notes
+  .post(protect, addNoteToPaper)
+  .get(getNotesForPaper);
 
-router.route("/:paperId/notes/:noteId").delete(protect, deleteNoteFromPaper); // Delete note
+router.route("/:paperId/notes/:noteId").delete(protect, deleteNoteFromPaper);
 
 export default router;

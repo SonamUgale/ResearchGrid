@@ -1,7 +1,7 @@
 .navbar {
   position: fixed;
   top: 0;
-  left: 220px; /* space for sidebar */
+  left: 220px;
   right: 0;
   height: 60px;
   background-color: #ffffff;
@@ -27,7 +27,7 @@
   margin: 0;
 }
 
-/* Centered Search Box */
+/* Search Box */
 .search-box {
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@
   padding: 5px 10px;
   border-radius: 6px;
   width: 400px;
-  margin: 0 auto; /* center */
+  margin: 0 auto;
   transition: all 0.2s ease-in-out;
 }
 

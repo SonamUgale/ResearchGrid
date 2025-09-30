@@ -10,8 +10,8 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  padding: 20px; /* ensures modal is not cut off on small screens */
-  overflow-y: auto; /* scroll if modal too tall */
+  padding: 20px;
+  overflow-y: auto;
 }
 
 /* Modal Box */
@@ -26,7 +26,7 @@
   flex-direction: column;
   gap: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease; /* smooth resize when errors appear */
+  transition: all 0.3s ease;
 }
 
 /* Close Button */
@@ -53,17 +53,17 @@
   flex-direction: column;
 }
 
-/* Input Group (with error and success) */
+/* Input Group  */
 .input-group {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px; /* enough space for error messages */
+  margin-bottom: 20px;
 }
 
 /* Input Field */
 input {
-  padding: 10px 40px 10px 10px; /* space for success checkmark */
+  padding: 10px 40px 10px 10px;
   border-radius: 6px;
   border: 1px solid #d1d5db;
   font-size: 14px;

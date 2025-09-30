@@ -3,10 +3,9 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
 
-  /* Alignment fixes */
-  margin: auto auto; /* centers the grid */
+  margin: auto auto;
   padding: 20px;
-  max-width: 1200px; /* keeps cards from stretching too wide */
+  max-width: 1200px;
 }
 
 .no-papers {

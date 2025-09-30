@@ -1,11 +1,10 @@
-/* ================= Notes Section ================= */
 .notes-section {
   margin-top: 30px;
   width: 100%;
   max-width: 850px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* center heading and button */
+  align-items: center;
 }
 
 .notes-heading {
@@ -39,7 +38,7 @@
   border-radius: 8px;
   cursor: pointer;
   margin-bottom: 25px;
-  align-self: center; /* center button */
+  align-self: center;
 }
 
 .add-note-btn:hover {
@@ -50,7 +49,7 @@
 .notes-list {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   justify-items: center;
   text-align: center;
@@ -58,7 +57,7 @@
 
 /* Center "No notes yet." */
 .notes-list p {
-  grid-column: 1 / -1; /* span full width of grid */
+  grid-column: 1 / -1;
   text-align: center;
   font-size: 15px;
   color: #475569;
@@ -108,7 +107,7 @@
   color: darkred;
 }
 
-/* ================= Mobile Responsiveness ================= */
+/*********************** Mobile Responsiveness ***************************888 */
 @media (max-width: 600px) {
   .note-input {
     min-height: 80px;
@@ -120,7 +119,7 @@
   }
 
   .notes-list {
-    grid-template-columns: 1fr; /* 1 card per row on mobile */
+    grid-template-columns: 1fr;
   }
 
   .note-card {

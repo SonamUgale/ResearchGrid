@@ -34,7 +34,6 @@ function PaperDetail({ token, currentUser }) {
   if (loading) return <p>Loading paper...</p>;
   if (error || !paper) return <p>{error || "Paper not found."}</p>;
 
-  // Minimal changes: filter out empty tags, keep authors as-is
   const authorsList = Array.isArray(paper.authors)
     ? paper.authors
     : paper.authors
@@ -88,7 +87,7 @@ function PaperDetail({ token, currentUser }) {
           <span>{paper.year || "N/A"}</span>
         </div>
 
-        {/* Minimal change: render each tag as separate pill */}
+        {}
         <div className="paper-tags">
           {tagsList.map((tag, idx) => (
             <span key={idx} className="tag">
