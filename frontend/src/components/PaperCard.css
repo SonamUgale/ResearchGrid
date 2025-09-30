@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  height: 270px; /* consistent height */
+  height: 300px; /* consistent height */
   overflow: hidden;
 }
 
@@ -41,7 +41,6 @@
   font-size: 0.9rem;
 }
 
-/* Abstract container */
 .paper-card .abstract {
   font-size: 0.9rem;
   color: #334155;
@@ -51,6 +50,13 @@
   text-align: justify;
   margin-bottom: 12px;
   word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* truncate roughly 6 lines */
+  -webkit-box-orient: vertical;
+}
+
+.paper-card .abstract.expanded {
+  -webkit-line-clamp: unset; /* show full abstract when expanded */
 }
 
 .paper-card .read-more {
@@ -58,10 +64,12 @@
   font-weight: 500;
   cursor: pointer;
   margin-left: 4px;
+  transition: opacity 0.2s ease;
 }
 
 .paper-card .read-more:hover {
   text-decoration: underline;
+  opacity: 0.85;
 }
 
 /* Bottom meta section */
