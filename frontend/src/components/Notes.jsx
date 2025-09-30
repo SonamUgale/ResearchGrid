@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { FaTrash } from "react-icons/fa";
 import "./Notes.css";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 function Notes({ paperId, token, currentUser }) {
   const [notes, setNotes] = useState([]);
@@ -15,12 +16,9 @@ function Notes({ paperId, token, currentUser }) {
     const fetchNotes = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(
-          `http://localhost:8080/api/papers/${paperId}/notes`,
-          {
-            headers: token ? { Authorization: `Bearer ${token}` } : {},
-          }
-        );
+        const res = await axios.get(`${API_URL}/api/papers/${paperId}/notes`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
         setNotes(res.data.reverse());
       } catch (err) {
         console.error(err);

@@ -61,7 +61,7 @@ const paperSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true, // paper owner
+    required: true,
   },
   notes: [noteSchema],
   createdAt: {

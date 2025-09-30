@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Notes from "./Notes";
 import "./PaperDetail.css";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 function PaperDetail({ token, currentUser }) {
   const { id } = useParams();
@@ -17,7 +18,7 @@ function PaperDetail({ token, currentUser }) {
   useEffect(() => {
     const fetchPaper = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/papers/${id}`, {
+        const res = await axios.get(`${API_URL}/api/papers/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPaper(res.data);
@@ -51,7 +52,7 @@ function PaperDetail({ token, currentUser }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/api/papers/${paper.id}`, {
+      await axios.delete(`${API_URL}/api/papers/${paper.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Paper deleted successfully!");

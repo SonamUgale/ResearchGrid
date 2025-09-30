@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./AddPaper.css";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 function AddPaper({ token, onNewPaper }) {
   const navigate = useNavigate();
@@ -44,16 +45,12 @@ function AddPaper({ token, onNewPaper }) {
     if (file) formData.append("file", file);
 
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/papers",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const res = await axios.post(`${API_URL}/api/papers`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       onNewPaper(res.data);
       toast.success("Paper added successfully!");
