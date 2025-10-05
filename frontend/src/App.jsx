@@ -12,7 +12,6 @@ import UpdatePaper from "./components/UpdatePaper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -45,7 +44,7 @@ function App() {
   useEffect(() => {
     const fetchPapers = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/papers`);
+        const res = await fetch("http://localhost:8080/api/papers");
         const data = await res.json();
         setPapers(data);
       } catch (err) {

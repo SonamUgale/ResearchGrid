@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./SignUp.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
 
 function Signup({ onSignupSuccess, onClose }) {
   const [name, setName] = useState("");
@@ -35,7 +35,7 @@ function Signup({ onSignupSuccess, onClose }) {
     if (!validate()) return;
 
     try {
-      const res = await axios.post(`${API_URL}/api/users/register`, {
+      const res = await axios.post("http://localhost:8080/api/users/register", {
         name,
         email,
         password,
